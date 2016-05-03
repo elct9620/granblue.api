@@ -26,7 +26,7 @@ type Character struct {
 	MinATK int
 	MaxATK int
 
-	PefferredWeapon WeaponType
+	PreferredWeapon []WeaponType
 
 	// TODO(elct9620): Add Ability and Support Ability
 	// TODO(elct9620): Add Ougi(奧義) information

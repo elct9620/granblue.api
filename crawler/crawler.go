@@ -12,6 +12,8 @@ import (
 
 // Fetcher
 type Parser interface {
+	SetBody(*goquery.Selection)
+	Parse()
 }
 
 // Crawler
@@ -19,7 +21,7 @@ type Crawler struct {
 	Source   string
 	Pagename string
 
-	parser *Parser
+	parser Parser
 	body   *goquery.Selection
 }
 
@@ -29,7 +31,7 @@ func New() *Crawler {
 }
 
 // Set parser to handle fetched html page
-func (c *Crawler) SetParser(parser *Parser) {
+func (c *Crawler) SetParser(parser Parser) {
 	c.parser = parser
 }
 
@@ -57,4 +59,9 @@ func (c *Crawler) Fetch() error {
 	c.body = doc.Find("#body")
 
 	return nil
+}
+
+func (c *Crawler) Parse() {
+	c.parser.SetBody(c.body)
+	c.parser.Parse()
 }

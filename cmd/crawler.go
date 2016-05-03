@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/elct9620/granblue.api/crawler"
 	"github.com/spf13/cobra"
 )
 
@@ -29,4 +30,10 @@ var (
 
 func fetchCharacterList(cmd *cobra.Command, args []string) {
 	// TODO(elct9620): Call crawler to get character data
+
+	c := crawler.New()
+	c.SetParser(&crawler.CharacterParser{})
+	c.SetPage(crawler.CHARACTERS_PAGE_NAME)
+	c.Fetch()
+	c.Parse()
 }
