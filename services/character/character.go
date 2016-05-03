@@ -1,0 +1,2 @@
+// Character Model
+package character
